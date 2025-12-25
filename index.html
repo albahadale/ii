@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>نكت ع الماشي</title>
+    <style>
+        body { font-family: 'Tahoma', sans-serif; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; color: white; }
+        .card { background: white; color: #333; padding: 40px; border-radius: 25px; box-shadow: 0 15px 35px rgba(0,0,0,0.2); text-align: center; width: 85%; max-width: 450px; }
+        h1 { color: #764ba2; margin-bottom: 20px; font-size: 28px; }
+        #joke-display { font-size: 22px; margin: 30px 0; min-height: 80px; line-height: 1.5; }
+        button { background: #ff4757; color: white; border: none; padding: 15px 30px; font-size: 18px; border-radius: 50px; cursor: pointer; transition: 0.3s; width: 100%; box-shadow: 0 4px 15px rgba(255, 71, 87, 0.3); }
+        button:hover { background: #ff6b81; transform: translateY(-2px); }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h1>😂 اضحك معنا</h1>
+        <div id="joke-display">اضغط على الزر لترى نكتة!</div>
+        <button onclick="getNewJoke()">نكتة غيرها</button>
+    </div>
+
+    <script>
+        const jokes = [
+            "محشش يسأل خويه: ليش القطار مهم؟ قاله: لأن تحته خطين!",
+            "عصبي وجعه ضرسه، راح للدكتور قاله اقلع كل سنوني وخلي هو وحده مثل الجلب!",
+            "بخيل اشترى نص كيلو تفاح، لقى وحدة خربانة، رجعها وطلب نص كيلو ثاني!",
+            "واحد محشش شاف اشارة 'ممنوع الوقوف' قام انبطح!",
+            "عجوز راحت للمستشفى، قالولها لازم تسوين أشعة، قالتلهم: ما يصير تلفزيون؟"
+        ];
+
+        function getNewJoke() {
+            const randomIndex = Math.floor(Math.random() * jokes.length);
+            document.getElementById('joke-display').innerText = jokes[randomIndex];
+        }
+        
+        // لتشغيل نكتة أول ما يفتح الموقع
+        window.onload = getNewJoke;
+    </script>
+</body>
+</html>
