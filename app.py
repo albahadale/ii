@@ -4,14 +4,21 @@ import random
 # إعدادات الصفحة
 st.set_page_config(page_title="موقع نكت وونسة", page_icon="😂")
 
-# ستايل CSS
+# ستايل CSS لإخفاء القوائم والشعار (Footer & Menu)
 st.markdown("""
     <style>
+    /* إخفاء القائمة العلوية */
+    header {visibility: hidden;}
+    
+    /* إخفاء شعار ستريمليت بالأسفل */
+    footer {visibility: hidden;}
+    
+    /* تحسين شكل الصفحة */
     .main { background-color: #f0f2f6; }
     .stButton>button { width: 100%; border-radius: 20px; height: 3em; background-color: #ff4b4b; color: white; font-weight: bold; }
     .joke-text { font-size: 25px; text-align: center; padding: 20px; background: white; border-radius: 15px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); color: black; }
     </style>
-    """, unsafe_allow_html=True) # تم تصحيح الكلمة هنا
+    """, unsafe_allow_html=True)
 
 st.title("😂 رادار النكت")
 st.subheader("اضغط على الزر حتى تضحك!")
@@ -24,9 +31,10 @@ jokes = [
     "عجوز راحت للمستشفى، قالولها لازم تسوين أشعة، قالتلهم: ما يصير تلفزيون؟"
 ]
 
+# إذا تريد تلغي النفاخات، امسح سطر st.balloons()
 if st.button('انطيني نكتة قوية!'):
     joke = random.choice(jokes)
     st.markdown(f'<div class="joke-text">{joke}</div>', unsafe_allow_html=True)
-    st.balloons()
+    # st.balloons()  <-- مسحتها حتى ما تطلع النفاخات
 else:
     st.info("انتظر النكتة هنا...")
