@@ -1,44 +1,33 @@
-from flask import Flask, render_template_string
+import streamlit as st
 import random
-import os
 
-app = Flask(__name__)
+# إعدادات الصفحة
+st.set_page_config(page_title="موقع نكت وونسة", page_icon="😂")
 
+# ستايل CSS بسيط لتحسين الخط والألوان
+st.markdown("""
+    <style>
+    .main { background-color: #f0f2f6; }
+    .stButton>button { width: 100%; border-radius: 20px; height: 3em; background-color: #ff4b4b; color: white; font-weight: bold; }
+    .joke-text { font-size: 25px; text-align: center; padding: 20px; background: white; border-radius: 15px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+    </style>
+    """, unsafe_allow_index=True)
+
+st.title("😂 رادار النكت")
+st.subheader("اضغط على الزر حتى تضحك!")
+
+# قائمة النكت
 jokes = [
-    "مرة واحد اشترى ساعة طلعت ضيقة، سواها نص ساعة.",
-    "واحد سأل محشش: شنو الفرق بين الأسبوع والموس؟ قال: الموس فيه حلاقة!",
-    "بخيل تزوج، راح لشهر العسل وحده!",
-    "عصبي وجعه ضرسه، راح للدكتور قاله: اقلع كل سنوني وخلي هو وحده مثل الجلب!"
+    "محشش يسأل خويه: ليش القطار مهم؟ قاله: لأن تحته خطين!",
+    "مرة واحد عصبي وجعه ضرسه، راح للدكتور قاله اقلع كل سنوني وخلي هو وحده مثل الجلب!",
+    "بخيل اشترى نص كيلو تفاح، لقى وحدة خربانة، رجعها وطلب نص كيلو ثاني!",
+    "واحد محشش شاف اشارة 'ممنوع الوقوف' قام انبطح!",
+    "عجوز راحت للمستشفى، قالولها لازم تسوين أشعة، قالتلهم: ما يصير تلفزيون؟"
 ]
 
-HTML_TEMPLATE = """
-<!DOCTYPE html>
-<html lang="ar" dir="rtl">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>موقع نكت</title>
-    <style>
-        body { font-family: sans-serif; background: #f4f4f9; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
-        .card { background: white; padding: 30px; border-radius: 15px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); text-align: center; }
-        button { background: #007bff; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; }
-    </style>
-</head>
-<body>
-    <div class="card">
-        <h1>😂 نكتة عشوائية</h1>
-        <p style="font-size: 1.5rem;">{{ joke }}</p>
-        <button onclick="location.reload()">نكتة ثانية</button>
-    </div>
-</body>
-</html>
-"""
-
-@app.route('/')
-def home():
-    return render_template_string(HTML_TEMPLATE, joke=random.choice(jokes))
-
-if __name__ == '__main__':
-    # مهم جداً للسيرفرات الخارجية
-    port = int(os.environ.get("PORT", 5000))
-    app.run(host='0.0.0.0', port=port)
+if st.button('انطيني نكتة قوية!'):
+    joke = random.choice(jokes)
+    st.markdown(f'<div class="joke-text">{joke}</div>', unsafe_allow_index=True)
+    st.balloons() # حركة نفاخات لما تطلع النكتة
+else:
+    st.info("انتظر النكتة هنا...")
